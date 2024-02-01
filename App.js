@@ -3,6 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+
+// Added temporary components to display navigation tabs, will be replaced as progress is made.
+
 const Page1 = () => {
   return (
     <View style={styles.pageView}>
