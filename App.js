@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+
+// Navigation Imports
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 // Added temporary components to display navigation tabs, will be replaced as progress is made.
 
@@ -51,12 +53,46 @@ const Tab = createBottomTabNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size}) => {
+            let iconName;
+            let iconSize = 24;
+            let iconColor;
+
+            if (route.name === 'Home') {
+              iconName = focused ? 'home-sharp' : 'home-outline';
+              iconColor = '#5050ff';
+            } else if (route.name === 'My Books') {
+              iconName = focused ? 'star' : 'star-outline';
+              iconColor = '#f0f700';
+            } else if (route.name === 'New Item') {
+              iconName = focused ? 'add-circle-sharp' : 'add-circle-outline';
+              iconSize = 40;
+              iconColor = '#e95429';
+            } else if (route.name === 'My Readlist') {
+              iconName = focused ? 'book-sharp' : 'book-outline';
+              iconColor = '#00a700';
+            } else if (route.name === 'Browse') {
+              iconName = focused ? 'search-sharp' : 'search-outline';
+              iconColor = '#ff0000';
+            }
+
+            return <Ionicons name={iconName} size={iconSize} color={iconColor} />
+          },
+          tabBarActiveBackgroundColor: '#292930',
+          tabBarInactiveBackgroundColor: '#1f1f25',
+          tabBarActiveTintColor: '#c5c5c5',
+          tabBarLabelStyle: {
+            fontSize: 12
+          }
+        })}
+      >
         <Tab.Screen name='Home' component={Page1} />
         <Tab.Screen name='My Books' component={Page2} />
         <Tab.Screen name='New Item' component={NewItem} />
         <Tab.Screen name='My Readlist' component={Page3} />
-        <Tab.Screen name='Browse New Titles' component={Page4} />
+        <Tab.Screen name='Browse' component={Page4} />
       </Tab.Navigator>
     </NavigationContainer>
   )
