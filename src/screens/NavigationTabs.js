@@ -6,6 +6,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
+// Screen Imports
+import MyBooks from './MyBooks';
+import Settings from './Settings';
+
 // Added temporary components to display navigation tabs, will be replaced as progress is made.
 
 // TODO: Add conditional logic to App.js to determine if user is logged in and render either Login component or 
@@ -16,14 +20,6 @@ const Page1 = () => {
   return (
     <View style={styles.pageView}>
       <Text style={styles.pageText}>Page1</Text>
-    </View>
-  )
-}
-
-const Page2 = () => {
-  return (
-    <View style={styles.pageView}>
-      <Text style={styles.pageText}>Page2</Text>
     </View>
   )
 }
@@ -44,17 +40,9 @@ const Page3 = () => {
   )
 }
 
-const Page4 = () => {
-  return (
-    <View style={styles.pageView}>
-      <Text style={styles.pageText}>Page4</Text>
-    </View>
-  )
-}
-
 const Tab = createBottomTabNavigator();
 
-const NavigationTabs = () => {
+const NavigationTabs = ({onPress}) => {
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -73,13 +61,13 @@ const NavigationTabs = () => {
             } else if (route.name === 'New Item') {
               iconName = focused ? 'add-circle-sharp' : 'add-circle-outline';
               iconSize = 40;
-              iconColor = '#e95429';
-            } else if (route.name === 'My Readlist') {
-              iconName = focused ? 'book-sharp' : 'book-outline';
-              iconColor = '#00a700';
+              iconColor = '#40cf5f';
             } else if (route.name === 'Browse') {
               iconName = focused ? 'search-sharp' : 'search-outline';
               iconColor = '#ff0000';
+            } else if (route.name === 'Settings') {
+              iconName = focused ? 'settings-sharp' : 'settings-outline';
+              iconColor = '#c0c0cf';
             }
 
             return <Ionicons name={iconName} size={iconSize} color={iconColor} />
@@ -93,10 +81,10 @@ const NavigationTabs = () => {
         })}
       >
         <Tab.Screen name='Home' component={Page1} />
-        <Tab.Screen name='My Books' component={Page2} />
+        <Tab.Screen name='My Books' component={MyBooks} />
         <Tab.Screen name='New Item' component={NewItem} />
-        <Tab.Screen name='My Readlist' component={Page3} />
-        <Tab.Screen name='Browse' component={Page4} />
+        <Tab.Screen name='Browse' component={Page3} />
+        <Tab.Screen name='Settings' children={() => <Settings onPress={onPress} />} />
       </Tab.Navigator>
     </NavigationContainer>
   )
