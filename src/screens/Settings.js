@@ -1,9 +1,11 @@
-import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import * as React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { useTheme, useThemeUpdate } from '../ThemeContext';
+import { StylesLight, StylesDark } from '../../public/Styles';
 
 // This adds a temporary Log Out button. Still need to add the following:
 
-// Dark Mode Toggle
+// Dark Mode Toggle => Updating state for button but not updating Styles.js
 // Change First Name
 // Change Last Name
 // Change Username
@@ -12,35 +14,20 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 // Change Profile Pic
 
 const Settings = ({onPress}) => {
+  const toggleTheme = useThemeUpdate();
+  const darkMode = useTheme();
+  const Styles = darkMode ? StylesDark : StylesLight;
+
   return (
-    <View style={styles.containerStyle}>
-      <TouchableOpacity style={styles.logoutButton} onPress={onPress}>
-        <Text style={styles.logoutText}>Log Out</Text>
+    <View style={Styles.screenContainer}>
+      <TouchableOpacity style={Styles.primaryButton} onPress={toggleTheme}>
+        <Text style={Styles.primaryButtonText}>{darkMode ? 'Light Mode' : 'Dark Mode'}</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={Styles.primaryButton} onPress={onPress}>
+        <Text style={Styles.primaryButtonText}>Log Out</Text>
       </TouchableOpacity>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  containerStyle: {
-    flex: 1,
-    alignContent: 'center',
-    justifyContent: 'center'
-  },
-  logoutText: {
-    color: 'white',
-    fontSize: 30,
-    textAlign: 'center'
-  },
-  logoutButton: {
-    alignSelf: 'center',
-    backgroundColor: 'blue',
-    borderWidth: 1,
-    borderColor: 'blue',
-    borderRadius: 8,
-    width: '75%',
-    padding: 8
-  }
-})
 
 export default Settings;
