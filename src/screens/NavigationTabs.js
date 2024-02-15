@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 // Navigation Imports
 import { NavigationContainer } from '@react-navigation/native';
@@ -7,38 +7,19 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 // Screen Imports
+import Home from './Home';
 import MyBooks from './MyBooks';
+import NewItem from './NewItem';
+import Browse from './Browse';
 import Settings from './Settings';
 
 // Added temporary components to display navigation tabs, will be replaced as progress is made.
 
-// TODO: Add conditional logic to App.js to determine if user is logged in and render either Login component or 
-// LoggedIn screen with Tab Navigation. Move Tab Navigation to LoggedIn Screen. Make New Item tab open a modal to
-// add a new book to your collection or read list.
-
-const Page1 = () => {
-  return (
-    <View style={styles.pageView}>
-      <Text style={styles.pageText}>Page1</Text>
-    </View>
-  )
-}
-
-const NewItem = () => {
-  return (
-    <View style={styles.pageView}>
-      <Text style={styles.pageText}>New Item</Text>
-    </View>
-  )
-}
-
-const Page3 = () => {
-  return (
-    <View style={styles.pageView}>
-      <Text style={styles.pageText}>Page3</Text>
-    </View>
-  )
-}
+// TODO: Add Context to imports and change NavTab color theme based on isDarkTheme state
+// TODO: Implement Google Books API on the Search screen.
+// TODO: Add NavTabs to MyBooks.js, (MyReads.js, MyWishlist.js). Start work on Backend to save books to either list.
+// TODO: Add authentication for users and finish Settings.js
+// TODO: Work on Home.js and anything else that needs polishing
 
 const Tab = createBottomTabNavigator();
 
@@ -80,11 +61,11 @@ const NavigationTabs = ({onPress}) => {
           }
         })}
       >
-        <Tab.Screen name='Home' component={Page1} />
+        <Tab.Screen name='Home' component={Home} />
         <Tab.Screen name='My Books' component={MyBooks} />
         <Tab.Screen name='New Item' component={NewItem} />
-        <Tab.Screen name='Browse' component={Page3} />
-        <Tab.Screen name='Settings' children={() => <Settings onPress={onPress} />} />
+        <Tab.Screen name='Browse' component={Browse} />
+        <Tab.Screen name='Settings' component={Settings} />
       </Tab.Navigator>
     </NavigationContainer>
   )

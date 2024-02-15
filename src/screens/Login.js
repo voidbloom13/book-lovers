@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { useTheme } from '../ThemeContext';
+import { AppContext } from '../../Context';
 import { StylesLight, StylesDark } from '../../public/Styles';
 
-const Login = ({onPress}) => {
-  const darkMode = useTheme();
-  const Styles = darkMode ? StylesDark : StylesLight;
+const Login = () => {
+  const Styles = AppContext().isDarkTheme ? StylesDark : StylesLight;
+  const toggleLogin = AppContext().toggleLogin;
 
   return (
     <View style={Styles.screenContainer}>
-      <TouchableOpacity style={Styles.primaryButton} onPress={() => {onPress()}}>
-        <Text style={Styles.primaryButtonText}>Login to view the App!</Text>
+      <TouchableOpacity style={Styles.primaryButton} onPress={toggleLogin}>
+        <Text style={Styles.primaryButtonText}>Login</Text>
       </TouchableOpacity>
     </View>
   )

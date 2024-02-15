@@ -1,19 +1,12 @@
-import React, {useState, useContext} from 'react';
-import { ThemeProvider } from './src/ThemeContext';
-import Login from './src/screens/Login'
-import NavigationTabs from './src/screens/NavigationTabs';
+import * as React from 'react';
+import { ContextProvider } from './Context';
+import AppContainer from './src/screens/AppContainer';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   return (
-    <ThemeProvider>
-      {
-        isLoggedIn 
-        ? <NavigationTabs onPress={() => {setIsLoggedIn(false)}} /> 
-        : <Login onPress={() => {setIsLoggedIn(true)}} />
-      }
-    </ThemeProvider>
+    <ContextProvider>
+      <AppContainer />
+    </ContextProvider>
   )
 }
 

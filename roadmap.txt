@@ -1,0 +1,4 @@
+- Create Context.js, App.js.
+- mkdir /src/screens/ and create Login.js, Navigation.js, Home.js, MyBooks.js, Browse.js, Settings.js
+- Create context for isDarkMode, isLoggedIn, setIsDarkMode, setIsLoggedIn
+- Set up Login.js, Navigation.js, and Settings.js to be able to log in, log out, toggle theme, and navigate between tabs
